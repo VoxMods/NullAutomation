@@ -1,0 +1,27 @@
+{
+  "forge_marker": 1,
+  "parent": "block/generated",
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "transform": "forge:default-block",
+    "textures": {
+      "down": "nullautomation:blocks/combustion_generator/furnace_top",
+      "up": "nullautomation:blocks/combustion_generator/furnace_top",
+      "north": "nullautomation:blocks/combustion_generator/furnace_side",
+      "east": "nullautomation:blocks/combustion_generator/furnace_side",
+      "south": "nullautomation:blocks/combustion_generator/furnace_side",
+      "west": "nullautomation:blocks/combustion_generator/furnace_side",
+      "particle": "blocks/lapis_block"
+    }
+  },
+  "variants": {
+    "normal": [
+      {
+      }
+    ],
+    "inventory": [
+      {
+      }
+    ]
+  }
+}

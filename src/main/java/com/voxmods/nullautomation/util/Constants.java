@@ -17,13 +17,13 @@ public class Constants {
         public static final String ID = "nullautomation";
         public static final String NAME = "Null Automation";
         public static final String DOMAIN = "nullautomation:";
-        public static final String DEPENDS = "required-after:Forge@[12.16.1.1887,);";
+        public static final String DEPENDS = "required-after:Forge@[12.18.1.2045,);";
         public static final String VERSION = "@VERSION@";
         public static final String MCVERSION = "@MCVERSION@";
     }
     public static final class Proxy
     {
-        public static final String COMMON = "com.voxmods.nullautomation.client.ClientProxy";
+        public static final String CLIENT = "com.voxmods.nullautomation.client.ClientProxy";
         public static final String SERVER = "com.voxmods.nullautomation.server.ServerProxy";
     }
 }

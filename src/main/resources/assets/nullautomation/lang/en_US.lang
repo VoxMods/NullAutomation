@@ -1,1 +1,3 @@
-tile.nullautomation.machineFluxGate.name=Flux Gate
+tile.nullautomation.machineEnergyGate.name=Energy Gate
+text.nullautomation.machineEnergyGate.title=Energy Gate
+tooltip.nullautomation.machineEnergyGate.analysis=Flaw %d contains §e%dT/§e%dT

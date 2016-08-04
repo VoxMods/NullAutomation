@@ -1,4 +1,3 @@
-
 // For those who want the bleeding edge
 buildscript {
     repositories {
@@ -20,7 +19,14 @@ repositories {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
     }
+    maven {
+        // Tesla
+        url 'http://maven.epoxide.xyz'
+    }
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 // Convention: MCVERSION.MAJORMOD.MINOR.PATCH
 // Similar to http://mcforge.readthedocs.io/en/latest/conventions/versioning/
@@ -61,7 +67,8 @@ minecraft {
 }
 
 dependencies {
-	deobfCompile "mezz.jei:jei_1.9:3.3.3.+"
+	deobfCompile "mezz.jei:jei_1.10.2:3.7.9.236"
+    compile "net.darkhax.tesla:Tesla:1.10.2-1.2.1.42"
 }
 
 processResources

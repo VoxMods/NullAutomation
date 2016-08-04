@@ -39,7 +39,7 @@ public class FlawStorageWorldData extends WorldSavedData {
     public static FlawStorageWorldData get(World world)
     {
         MapStorage storage = world.getMapStorage();
-        FlawStorageWorldData instance = (FlawStorageWorldData) storage.loadData(FlawStorageWorldData.class, StorageKey);
+        FlawStorageWorldData instance = (FlawStorageWorldData) storage.getOrLoadData(FlawStorageWorldData.class, StorageKey);
         if (instance == null)
         {
             instance = new FlawStorageWorldData();
@@ -91,7 +91,7 @@ public class FlawStorageWorldData extends WorldSavedData {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound)
     {
         NBTTagList nbtTagList = new NBTTagList();
 
@@ -99,13 +99,14 @@ public class FlawStorageWorldData extends WorldSavedData {
         {
             FlawInventory inventory = entry.getValue();
 
-            NBTTagCompound nbtTagCompound1 = new NBTTagCompound();
+            NBTTagCompound nbtTagCompound1 = inventory.writeToNBT(new NBTTagCompound());
             nbtTagCompound1.setInteger("Flaw", entry.getKey());
-            inventory.writeToNBT(nbtTagCompound1);
             nbtTagList.appendTag(nbtTagCompound1);
         }
 
-        nbtTagCompound.setTag("flaws", nbtTagList);
+        nbtTagCompound.setTag("Flaws", nbtTagList);
         nbtTagCompound.setInteger("LastFlawId", lastFlawId);
+
+        return nbtTagCompound;
     }
 }

@@ -1,11 +1,10 @@
 package com.voxmods.nullautomation.registry;
 
 import com.voxmods.nullautomation.block.ModBlock;
-import com.voxmods.nullautomation.machine.generator.rfcompat.BlockFluxGate;
+import com.voxmods.nullautomation.machine.gate.energygate.BlockEnergyGate;
 import com.voxmods.nullautomation.util.Constants;
 import com.voxmods.nullautomation.util.helpers.RenderHelper;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -14,12 +13,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.*;
 
 public class ModBlocks {
-    public static final BlockFluxGate FLUX_GATE;
+    public static final BlockEnergyGate ENERGY_GATE;
 
     private static final Set<Block> MOD_BLOCKS = new HashSet<>();
 
     static {
-        FLUX_GATE = (BlockFluxGate) registerBlock(new BlockFluxGate(), true);
+        ENERGY_GATE = (BlockEnergyGate) registerBlock(new BlockEnergyGate(), true);
     }
 
     public static void init() {

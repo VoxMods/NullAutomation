@@ -9,24 +9,26 @@
  * Created by Vox (Benjamin Ward) on 5/8/2016.
  */
 
-package com.voxmods.nullautomation.common;
+package com.voxmods.nullautomation.interfaces;
 
 import com.voxmods.nullautomation.registry.ModBlocks;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-public class CommonProxy {
-    public void preInit(FMLPreInitializationEvent event) {
+public interface IProxy {
+    public default void preInit(FMLPreInitializationEvent event)
+    {
         ModBlocks.init();
         ModBlocks.initRenders();
     }
 
-    public void init(FMLInitializationEvent event) {
+    public default void init(FMLInitializationEvent event) {
         // NO-OP
     }
 
-    public void postInit(FMLPostInitializationEvent event) {
+    public default void postInit(FMLPostInitializationEvent event)
+    {
         // NO-OP
     }
 }

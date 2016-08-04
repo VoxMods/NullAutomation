@@ -11,6 +11,9 @@
 package com.voxmods.nullautomation.storage;
 
 import com.google.common.collect.Lists;
+import net.darkhax.tesla.api.ITeslaConsumer;
+import net.darkhax.tesla.api.ITeslaHolder;
+import net.darkhax.tesla.api.ITeslaProducer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -20,11 +23,32 @@ import net.minecraftforge.common.util.Constants;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class FlawInventory {
+public class FlawInventory implements ITeslaProducer, ITeslaConsumer, ITeslaHolder {
     private final FlawStorageWorldData manager;
 
-    private final List<ItemStack> inventorySlots = Lists.newArrayList();
-    private long Energy;
+    /// Energy
+    /**
+     * The amount of stored Tesla power.
+     */
+    protected long stored;
+    /**
+     * The maximum amount of Tesla power that can be stored.
+     */
+    protected long capacity = 1000000; // TODO: Fix this?
+    /**
+     * The maximum amount of Tesla power that can be accepted.
+     */
+    protected long inputRate = 128; // TODO: Fix this?
+    /**
+     * The maximum amount of Tesla power that can be extracted.
+     */
+    protected long outputRate = 128; // TODO: Fix this?
+
+    /// Items
+    //private final List<ItemStack> inventorySlots = Lists.newArrayList();
+
+    // Liquids
+    ///
 
     FlawInventory(FlawStorageWorldData manager) {
         this.manager = manager;
@@ -32,19 +56,82 @@ public class FlawInventory {
 
     private void onContentsChanged() {
         manager.markDirty();
+
     }
+
+    @Override
+    public long getStoredPower () {
+
+        return this.stored;
+    }
+
+    @Override
+    public long givePower (long Tesla, boolean simulated) {
+
+        final long acceptedTesla = Math.min(this.getCapacity() - this.stored, Math.min(inputRate, Tesla));
+
+        if (!simulated) {
+            this.stored += acceptedTesla;
+            onContentsChanged();
+        }
+        return acceptedTesla;
+    }
+
+    @Override
+    public long takePower (long Tesla, boolean simulated) {
+
+        final long removedPower = Math.min(this.stored, Math.min(outputRate, Tesla));
+
+        if (!simulated) {
+            this.stored -= removedPower;
+            onContentsChanged();
+        }
+        return removedPower;
+    }
+
+    @Override
+    public long getCapacity () {
+
+        return this.capacity;
+    }
+
+    private NBTTagCompound serializeEnergyInfoNBT () {
+
+        final NBTTagCompound dataTag = new NBTTagCompound();
+        dataTag.setLong("TeslaPower", this.stored);
+        dataTag.setLong("TeslaCapacity", this.capacity);
+        dataTag.setLong("TeslaInput", this.inputRate);
+        dataTag.setLong("TeslaOutput", this.outputRate);
+        return dataTag;
+    }
+
+    private void deserializeEnergyInfoNBT(NBTTagCompound nbt) {
+
+        this.stored = nbt.getLong("TeslaPower");
+        if (nbt.hasKey("TeslaCapacity"))
+            this.capacity = nbt.getLong("TeslaCapacity");
+        if (nbt.hasKey("TeslaInput"))
+            this.inputRate = nbt.getLong("TeslaInput");
+        if (nbt.hasKey("TeslaOutput"))
+            this.outputRate = nbt.getLong("TeslaOutput");
+        if (this.stored > this.capacity)
+            this.stored = this.capacity;
+    }
+
 
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
-        Energy = nbtTagCompound.getLong("Energy");
-        NBTTagList itemList = nbtTagCompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-        readItems(itemList);
+        deserializeEnergyInfoNBT(nbtTagCompound.getCompoundTag("EnergyInfo"));
+        //NBTTagList itemList = nbtTagCompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+        //readItems(itemList);
     }
 
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
-        nbtTagCompound.setLong("Energy", Energy);
-        nbtTagCompound.setTag("Items", writeItems());
+    public NBTTagCompound writeToNBT(NBTTagCompound nbtTagCompound) {
+        nbtTagCompound.setTag("EnergyInfo", serializeEnergyInfoNBT());
+        //nbtTagCompound.setTag("Items", writeItems());
+        return nbtTagCompound;
     }
 
+    /*
     private void readItems(NBTTagList itemList) {
         inventorySlots.clear();
 
@@ -67,54 +154,6 @@ public class FlawInventory {
         return itemList;
     }
 
-    /**
-     * Remove energy from a FlawInventory.
-     *
-     * @param maxExtract
-     *            Maximum amount of energy to extract.
-     * @param simulate
-     *            If TRUE, the extraction will only be simulated.
-     * @return Amount of energy that was (or would have been, if simulated) extracted.
-     */
-    int extractEnergy(int maxExtract, boolean simulate)
-    {
-        if(!simulate)
-            onContentsChanged();
-        return 0;
-    }
-
-    /**
-     * Add energy to a FlawInventory.
-     *
-     * @param maxReceive
-     *            Maximum amount of energy to receive.
-     * @param simulate
-     *            If TRUE, the charge will only be simulated.
-     * @return Amount of energy that was (or would have been, if simulated) received.
-     */
-    public int receiveEnergy(int maxReceive, boolean simulate) {
-        if(!simulate)
-            onContentsChanged();
-        return 0;
-    }
-
-    /**
-     * Returns the amount of energy currently stored.
-     *
-     * @return Amount of energy that is currently stored.
-     */
-    public int getEnergyStored() {
-        return 0;
-    }
-
-    /**
-     * Returns the maximum amount of energy that can be stored.
-     *
-     * @return Maximum amount of energy that can be stored.
-     */
-    public int getMaxEnergyStored() {
-        return 0;
-    }
 
     public int getSlots() {
         return inventorySlots.size();
@@ -186,4 +225,5 @@ public class FlawInventory {
         onContentsChanged();
         return extracted;
     }
+    */
 }

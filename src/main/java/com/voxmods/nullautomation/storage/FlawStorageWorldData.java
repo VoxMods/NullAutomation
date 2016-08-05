@@ -72,7 +72,7 @@ public class FlawStorageWorldData extends WorldSavedData {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-        NBTTagList nbtTagList = nbtTagCompound.getTagList("Rifts", Constants.NBT.TAG_COMPOUND);
+        NBTTagList nbtTagList = nbtTagCompound.getTagList("Flaws", Constants.NBT.TAG_COMPOUND);
 
         flaws.clear();
 

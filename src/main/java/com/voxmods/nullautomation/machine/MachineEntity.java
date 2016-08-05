@@ -39,16 +39,4 @@ public class MachineEntity extends TileEntity implements ITickable {
     @Override
     public void update() {
     }
-
-    @Override
-    public void readFromNBT(NBTTagCompound compound)
-    {
-        super.readFromNBT(compound);
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
-    {
-        return super.writeToNBT(compound);
-    }
 }

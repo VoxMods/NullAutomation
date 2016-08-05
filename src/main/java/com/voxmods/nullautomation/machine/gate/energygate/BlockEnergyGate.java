@@ -60,11 +60,15 @@ public class BlockEnergyGate extends ModBlock {
 
         // Check for info tool here
         if(playerIn.isSneaking())  {
-            if (tileEntity.hasCapability(TeslaCapabilities.CAPABILITY_HOLDER, side)) {
-                final int MESSAGE_ID = 14940026;
-                final ITeslaHolder holder = tileEntity.getCapability(TeslaCapabilities.CAPABILITY_HOLDER, side);
-                // TODO: put msg id in info tool, check flaw id instead of 0
-                TextUtils.sendSpamlessMessage(MESSAGE_ID, new TextComponentString(I18n.format("tooltip.nullautomation.machineEnergyGate.analysis", 0, holder.getStoredPower(), holder.getCapacity())));
+            // NOTE: Flaw only knows about power on the server, but this method is called both on server and client.
+            if(!worldIn.isRemote)
+                {
+                if (tileEntity.hasCapability(TeslaCapabilities.CAPABILITY_HOLDER, side)) {
+                    final int MESSAGE_ID = 14940026;
+                    final ITeslaHolder holder = tileEntity.getCapability(TeslaCapabilities.CAPABILITY_HOLDER, side);
+                    // TODO: put msg id in info tool, check flaw id instead of 0
+                    TextUtils.sendSpamlessMessage(MESSAGE_ID, new TextComponentString(I18n.format("tooltip.nullautomation.machineEnergyGate.analysis", 0, holder.getStoredPower(), holder.getCapacity())));
+                }
             }
         }
         else {

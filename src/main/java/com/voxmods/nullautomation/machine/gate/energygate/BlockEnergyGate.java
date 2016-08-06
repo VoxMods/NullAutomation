@@ -13,7 +13,7 @@ package com.voxmods.nullautomation.machine.gate.energygate;
 import com.voxmods.nullautomation.NullAutomation;
 import com.voxmods.nullautomation.block.ModBlock;
 import com.voxmods.nullautomation.util.Constants;
-import com.voxmods.nullautomation.util.GuiHandler;
+import com.voxmods.nullautomation.util.gui.GuiHandler;
 import com.voxmods.nullautomation.util.TextUtils;
 import net.darkhax.tesla.api.ITeslaHolder;
 import net.darkhax.tesla.capability.TeslaCapabilities;

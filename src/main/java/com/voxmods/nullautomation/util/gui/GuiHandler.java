@@ -1,7 +1,7 @@
 /**
  * Created by Benjamin Ward on 8/4/2016.
  */
-package com.voxmods.nullautomation.util;
+package com.voxmods.nullautomation.util.gui;
 
 import com.voxmods.nullautomation.machine.gate.energygate.ContainerEnergyGate;
 import com.voxmods.nullautomation.machine.gate.energygate.GuiEnergyGate;

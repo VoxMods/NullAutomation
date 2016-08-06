@@ -19,6 +19,8 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class TileEnergyGate extends MachineEntity {
 
+    // TODO: push power if in correct mode
+
     public boolean isUsableByPlayer(EntityPlayer player)
     {
         return (worldObj.getTileEntity(pos) == this)

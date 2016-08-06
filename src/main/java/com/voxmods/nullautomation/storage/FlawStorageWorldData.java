@@ -55,7 +55,7 @@ public class FlawStorageWorldData extends WorldSavedData {
 
         if (flaw == null)
         {
-            flaw = new FlawInventory(this);
+            flaw = new FlawInventory(this, id);
             flaws.put(id, flaw);
         }
 
@@ -81,7 +81,7 @@ public class FlawStorageWorldData extends WorldSavedData {
             NBTTagCompound nbtTagCompound1 = nbtTagList.getCompoundTagAt(i);
             int j = nbtTagCompound1.getByte("Flaw");
 
-            FlawInventory inventory = new FlawInventory(this);
+            FlawInventory inventory = new FlawInventory(this, j);
             inventory.readFromNBT(nbtTagCompound1);
 
             flaws.put(j, inventory);

@@ -13,6 +13,8 @@ package com.voxmods.nullautomation.machine;
 import com.voxmods.nullautomation.storage.FlawInventory;
 import com.voxmods.nullautomation.storage.FlawStorageWorldData;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
@@ -20,11 +22,11 @@ public class MachineEntity extends TileEntity implements ITickable {
     private FlawInventory inventory;
     protected int flawID = 0;
 
-    protected FlawInventory getFlaw(int id)
-    {
+    protected FlawInventory getFlaw(int id) {
+
         if(id < 0)
             return null;
-        if(inventory == null)
+        if(inventory == null || inventory.id != id)
             inventory = FlawStorageWorldData.get(worldObj).getFlaw(id);
         return inventory;
     }
@@ -38,5 +40,24 @@ public class MachineEntity extends TileEntity implements ITickable {
 
     @Override
     public void update() {
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket () {
+
+        return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag () {
+
+        return this.writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public void onDataPacket (NetworkManager net, SPacketUpdateTileEntity packet) {
+
+        super.onDataPacket(net, packet);
+        this.readFromNBT(packet.getNbtCompound());
     }
 }

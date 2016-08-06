@@ -25,6 +25,7 @@ import java.util.List;
 
 public class FlawInventory implements ITeslaProducer, ITeslaConsumer, ITeslaHolder {
     private final FlawStorageWorldData manager;
+    public final int id;
 
     /// Energy
     /**
@@ -50,8 +51,9 @@ public class FlawInventory implements ITeslaProducer, ITeslaConsumer, ITeslaHold
     // Liquids
     ///
 
-    FlawInventory(FlawStorageWorldData manager) {
+    FlawInventory(FlawStorageWorldData manager, int id) {
         this.manager = manager;
+        this.id = id;
     }
 
     private void onContentsChanged() {

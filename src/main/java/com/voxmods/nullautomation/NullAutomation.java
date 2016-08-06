@@ -13,7 +13,7 @@ package com.voxmods.nullautomation;
 
 import com.voxmods.nullautomation.interfaces.IProxy;
 import com.voxmods.nullautomation.util.Constants;
-import com.voxmods.nullautomation.util.GuiHandler;
+import com.voxmods.nullautomation.util.gui.GuiHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

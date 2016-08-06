@@ -4,7 +4,7 @@ import com.voxmods.nullautomation.block.ModBlock;
 import com.voxmods.nullautomation.machine.gate.energygate.BlockEnergyGate;
 import com.voxmods.nullautomation.machine.gate.energygate.TileEnergyGate;
 import com.voxmods.nullautomation.util.Constants;
-import com.voxmods.nullautomation.util.helpers.RenderHelper;
+import com.voxmods.nullautomation.util.render.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

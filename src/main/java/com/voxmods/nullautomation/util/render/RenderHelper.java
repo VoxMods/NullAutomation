@@ -1,4 +1,4 @@
-package com.voxmods.nullautomation.util.helpers;
+package com.voxmods.nullautomation.util.render;
 
 import com.voxmods.nullautomation.util.Constants;
 import net.minecraft.block.Block;

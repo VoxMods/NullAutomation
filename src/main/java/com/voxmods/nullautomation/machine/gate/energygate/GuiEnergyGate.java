@@ -3,6 +3,7 @@
  */
 package com.voxmods.nullautomation.machine.gate.energygate;
 
+import com.voxmods.nullautomation.client.gui.GuiContainerWindow;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -10,7 +11,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import com.voxmods.nullautomation.util.Constants;
 
-public class GuiEnergyGate extends GuiContainer {
+public class GuiEnergyGate extends GuiContainerWindow {
     protected static final String titleString = "text." + Constants.Mod.ID + ".machineEnergyGate.title";
 
     protected ResourceLocation guiTextureLocation = new ResourceLocation(Constants.Mod.DOMAIN + "textures/gui/machineEnergyGate.png");
@@ -25,18 +26,18 @@ public class GuiEnergyGate extends GuiContainer {
         this.ySize = 165; // Arbitrary
     }
 
-    @Override
-    protected void drawGuiContainerForegroundLayer(int i, int j)
-    {
-        String name = I18n.format(titleString);
-        mc.fontRendererObj.drawString(name, (xSize - mc.fontRendererObj.getStringWidth(name)) / 2, 6, 0x404040);
-        mc.fontRendererObj.drawString(I18n.format(this.player.getName()), 8, ySize - 96 + 2, 0x404040);
-    }
+    //@Override
+    //protected void drawGuiContainerForegroundLayer(int i, int j)
+    //{
+        //String name = I18n.format(titleString);
+        //mc.fontRendererObj.drawString(name, (xSize - mc.fontRendererObj.getStringWidth(name)) / 2, 6, 0x404040);
+        //mc.fontRendererObj.drawString(I18n.format(this.player.getName()), 8, ySize - 96 + 2, 0x404040);
+    //}
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
-    {
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+    //@Override
+    //protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+    //{
+    /*    GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
@@ -58,5 +59,5 @@ public class GuiEnergyGate extends GuiContainer {
                 this.drawTexturedModalRect(sx, y + 32 + sy, 176, sy, 9, ny);
             }
         }*/
-    }
+    //}
 }
